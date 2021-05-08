@@ -70,7 +70,7 @@ __Output:__
 
 The following output will be saved in a directory called `/out`:
 
-- *{target_img}_hist.csv:*\ 
+- *{target_img}_hist.csv:*\
   CSV file with filenames and chi-square distances of all images to the target image
 
 - *{target_img}_hist_top3.png:*\
