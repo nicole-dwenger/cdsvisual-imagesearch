@@ -4,17 +4,17 @@
 
 This repository contains scripts for two different methods to search for and find similar images: (1) using color histograms and (2) using feature embeddings extracted the pretrained CNN VGG16. The aim of developing scripts for two different methods allows comparison of their their outputs, which is discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
 
-## Methods
+# Methods
 
 1. **Image Search using Color Histograms**: Images can be represented by their distribution of color. In an RGB color space, color histograms display the how often each pixel intensity (between 0-255) occurs in each of the three color channels for a given image. These distributions can be compared using different distance metrics. The script in this repository extracts color distributions of each of the images and identifies similar images using the chi-square distance measure.
 
 2. **Image Search using Image Embeddings**: Pretrained CNNs can be used to extract image embeddings. In other words, we use the pretrained weights to represent each image in a complex and dense feature space, i.e. in a vector. These vectors can be compared to find images which are visually similar. The script in this repository extracts features of each image using the pretrained CNNs VGG16 and finds similar images using the k-Nearest-Neighbour algorithm. 
  
-## Usage 
+# Usage 
 
 ! The scripts have only been tested on Linux, using Python 3.6.9. 
 
-### 1. Cloning the Repository and Installing Dependencies
+## 1. Cloning the Repository and Installing Dependencies
 
 To run the scripts, I recommend cloning this repository and installing necessary dependencies in a virtual environment. The bash script `create_venv.sh` can be used to create this virtual environment with all necessary dependencies, listed in the `requirements.txt` file. The following commands can be used:
 
@@ -32,7 +32,7 @@ bash create_vision_venv.sh
 source venv_imagesearch/bin/activate
 ```
 
-### 2. Data
+## 2. Data
 
 Both image search scripts were run on the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/). A zip file of this dataset callsed `flowers.zip` is in the `data` directory, and should be unzipped to run the script. If you wish to run the script on your own image files, they should have one of the following extensions (.jpg, .JPG, .jpeg, .JPEG, .png, .PNG), and the `--path` argument needs to be specified when running the script (see below). 
 
@@ -43,9 +43,9 @@ unzip flowers.zip
 cd ..
 ```
 
-### 3. Running the Scripts
+## 3. Running the Scripts
 
-#### `img_search_histogram.py`: Image Search Using Color Histograms
+### Image Search Using Color Histograms: `img_search_histogram.py`
 
 The script should be run from the src directory:
 ```bash
@@ -59,14 +59,14 @@ python3 img_search_histogram.py
 python3 img_search_histogram.py -t image_0002.jpg
 ```
 
-</ins>Parameters:</ins>
+__Parameters:__ 
 - *-d, --directory : str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
 - *-t, --target_img : optional, default:* `image_0001.jpg`\
   Target image, for which all other images should be compared to find the most similar ones. 
 
-</ins>Output:</ins>
+__Output:__
 
 The following output will be saved in a directory called `/out`:
 
@@ -79,7 +79,7 @@ The following output will be saved in a directory called `/out`:
 Example output for three images is provided in the `/out` directory.
 
 
-#### `img_search_embeddigs.py`: Image Search Using Image Embeddings
+### Image Search Using Image Embeddings: `img_search_embeddigs.py`
 
 The script should be run from the src directory:
 ```bash
@@ -93,7 +93,7 @@ python3 img_search_embeddings.py
 python3 img_search_embeddings.py -t image_0002.jpg
 ```
 
-<ins>Parameters:</ins> 
+__Parameters:__ 
 - *-d, --directory : str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
@@ -103,7 +103,7 @@ python3 img_search_embeddings.py -t image_0002.jpg
 - *-k, --k_neighbors : optional, default:* `20`\
   Number of k neighbors to extract and save distances for. 
 
-</ins>Output:</ins>
+__Output:__
 
 The following output will be saved in a directory called `/out`:
 
@@ -115,7 +115,7 @@ The following output will be saved in a directory called `/out`:
 
 Example output for two images is provided in the `/out` directory.
 
-## Results and Discussion 
+# Results and Discussion 
 
 Both scripts have been run two images of the flowers dataset. These images and the three most similar images that have been identified using color histograms and image embeddings are displayed below. From these examples, it can be seen that image search using color histograms can find images of flowers which are fairly similar in e.g. their color. However, only comparison of feature embeddings actually allows finding images of flowers of the same kind.  
 
