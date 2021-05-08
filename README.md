@@ -108,7 +108,7 @@ __Output:__
 The following output will be saved in a directory called `/out`:
 
 - *{target_img}_embeddings.csv:*\
-  .csv file with filenames and cosine distances of k nearest images to the target image. 
+  CSV file with filenames and cosine distances of k nearest images to the target image. 
 
 - *{target_img}_embeddings_top3.png:*\
   Image with target image and 3 most similar images.
