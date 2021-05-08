@@ -1,9 +1,8 @@
 # Image Search 
 
+> [Methods](#methods) | [Repository Structure](#repository-structure) | [Usage](#usage) | [Results and Disucssion](#results-and-discussion)
 
 This repository contains scripts for two different methods to search for and find similar images: (1) using color histograms and (2) using feature embeddings extracted the pretrained CNN VGG16. The aim of developing scripts for two different methods was also to compare of their outputs and usability, which are discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
-
-> [Methods](#methods) | [Repository Structure](#repository-structure) | [Usage](#usage) | [Results and Disucssion](#results-and-discussion)
 
 
 # Methods
@@ -12,27 +11,28 @@ This repository contains scripts for two different methods to search for and fin
 
 2. **Image Search using Image Embeddings**: Pretrained CNNs can be used to extract image embeddings. In other words, we use the pretrained weights to represent each image in a complex and dense feature space, i.e. in a vector. These vectors can be compared to find images which are visually similar. The script in this repository extracts features of each image using the pretrained CNNs VGG16 and finds similar images using the k-Nearest-Neighbour algorithm. 
 
+
 # Repository Structure
 
 ```
-|-- data/								# dir for input data
-	|-- flowers.zip						# example data to run scripts
+|-- data/                               # dir for input data
+    |-- flowers.zip                     # example data to run scripts
 
-|-- out/								# dir for output from scripts
-	|-- image_0001_embeddings.csv		# example output
-	|-- image_00001_embeddings.png
-	|-- ...
+|-- out/                                # dir for output from scripts
+    |-- image_0001_embeddings.csv       # example output
+    |-- image_00001_embeddings.png
+    |-- ...
 
-|-- src/								# image search scripts
-	|-- img_search_embeddings.py		# image search using feature embeddings
-	|-- img_searc_histogram.py			# image search using colorhistograms
+|-- src/                                # image search scripts
+    |-- img_search_embeddings.py        # image search using feature embeddings
+    |-- img_searc_histogram.py          # image search using colorhistograms
 
-|-- utils/								# utilities
-	|-- img_search_utils.py				# utility script, with functions  used across scripts
+|-- utils/                              # utilities
+    |-- img_search_utils.py             # utility script, with functions  used across scripts
 
-|-- README.md							
-|-- create_venv.sh						# bash script to recreate virtual environment 
-|-- requirements.txt					# dependencies, installed in virtual environment
+|-- README.md
+|-- create_venv.sh                      # bash script to recreate virtual environment 
+|-- requirements.txt                    # dependencies, installed in virtual environment
 ```
 
 
