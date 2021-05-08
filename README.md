@@ -71,7 +71,7 @@ __Output:__
 The following output will be saved in a directory called `/out`:
 
 - *{target_img}_hist.csv:*\ 
-  .csv file with filenames and chi-square distances of all images to the target image
+  CSV file with filenames and chi-square distances of all images to the target image
 
 - *{target_img}_hist_top3.png:*\
   image with target image and top3 closest images 
