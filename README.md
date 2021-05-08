@@ -71,12 +71,9 @@ unzip flowers.zip
 cd ..
 ```
 
+### 3.1. Image Search Using Color Histograms: `img_search_histogram.py`
 
-### 3. Running the Scripts
-
-#### 3.1. Image Search Using Color Histograms: `img_search_histogram.py`
-
-The script should be run from the src directory:
+The script should be run from the `src/` directory:
 ```bash
 # move into src directory before running the script
 cd src/
@@ -88,7 +85,7 @@ python3 img_search_histogram.py
 python3 img_search_histogram.py -t image_0002.jpg
 ```
 
-Parameters:
+__Parameters__
 - *-d, --directory : str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
@@ -96,9 +93,9 @@ Parameters:
   Target image, for which all other images should be compared to find the most similar ones. 
 
 
-Output:
+__Output__
 
-The following output will be saved in a directory called `/out`:
+The following output will be saved in a directory called `/out`. Examples can be found in `/out` in this directory.
 
 - *{target_img}_hist.csv:*\
   CSV file with filenames and chi-square distances of all images to the target image
@@ -106,12 +103,10 @@ The following output will be saved in a directory called `/out`:
 - *{target_img}_hist_top3.png:*\
   Image with target image and 3 most similar images. 
 
-Example output for three images is provided in the `/out` directory.
 
+### 3.2. Image Search Using Image Embeddings: `img_search_embeddigs.py`
 
-#### 3.2. Image Search Using Image Embeddings: `img_search_embeddigs.py`
-
-The script should be run from the src directory:
+The script should be run from the `src/` directory:
 ```bash
 # move into src directory before running the script
 cd src/
@@ -123,7 +118,7 @@ python3 img_search_embeddings.py
 python3 img_search_embeddings.py -t image_0002.jpg
 ```
 
-Parameters:
+__Parameters:__
 - *-d, --directory : str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
@@ -134,17 +129,15 @@ Parameters:
   Number of k neighbors to extract and save distances for. 
 
 
-Output:
+__Output:
 
-The following output will be saved in a directory called `/out`:
+The following output will be saved in a directory called `/out`. Examples can be found in `/out` in this directory.
 
 - *{target_img}_embeddings.csv:*\
   CSV file with filenames and cosine distances of k nearest images to the target image. 
 
 - *{target_img}_embeddings_top3.png:*\
   Image with target image and 3 most similar images.
-
-Example output for two images is provided in the `/out` directory.
 
 
 ## Results and Discussion 
