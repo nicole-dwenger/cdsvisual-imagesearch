@@ -114,18 +114,18 @@ Example output for two images is provided in the `/out` directory.
 __Three most similar images to image_0001.jpg:__
 
 Using color histograms:
-![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/main/out/image_0001_hist_top3.png)
+![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_hist_top3.png)
 
 Using feature embeddings from VGG16
-![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/main/out/image_0001_embeddings_top3.png)
+![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_embeddings_top3.png)
 
 __Three most similar images to image_0300.jpg:__
 
 Using color histograms:
-![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/main/out/image_0300_hist_top3.png)
+![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0300_hist_top3.png)
 
 Using feature embeddings from VGG16
-![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/main/out/image_0300_embeddings_top3.png)
+![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0300_embeddings_top3.png)
 
 From the images above, it can be seen that while image search using color histograms can find images of flowers which are fairly similar in e.g. their color. However, comparison of extracted features actually allows finding pictures of the same kind of flower. 
 
