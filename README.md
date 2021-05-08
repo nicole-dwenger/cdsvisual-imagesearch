@@ -74,7 +74,7 @@ cd ..
 
 ### 3. Running the Scripts
 
-#### Image Search Using Color Histograms: img_search_histogram.py
+#### 3.1. Image Search Using Color Histograms: `img_search_histogram.py`
 
 The script should be run from the src directory:
 ```bash
@@ -109,7 +109,7 @@ The following output will be saved in a directory called `/out`:
 Example output for three images is provided in the `/out` directory.
 
 
-#### Image Search Using Image Embeddings: img_search_embeddigs.py
+#### 3.2. Image Search Using Image Embeddings: `img_search_embeddigs.py`
 
 The script should be run from the src directory:
 ```bash
