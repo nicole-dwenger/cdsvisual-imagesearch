@@ -2,13 +2,13 @@
 
 > Image search using (1) color histograms and (2) features embeddings.
 
-This repository contains scripts for two different methods to search for and find similar images: (1) using color histograms and (2) using feature embeddings extracted from pretrained models, i.e. VGG16 and ResNet50. 
+This repository contains scripts for two different methods to search for and find similar images: (1) using color histograms and (2) using feature embeddings extracted the pretrained CNN VGG16. The aim of developing scripts for two different methods allows comparison of their their outputs, which is discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation. 
 
 ## Methods
 
 1. **Image Search using Color Histograms**: Images can be represented by their distribution of color. In an RGB color space, color histograms display the how often each pixel intensity (between 0-255) occurs in each of the three color channels for a given image. These distributions can be compared using different distance metrics. The script in this repository extracts color distributions of each of the images and identifies similar images using the chi-square distance measure.
 
-2. **Image Search using Image Embeddings**: Pretrained CNNs can be used to extract image embeddings. In other words, we use the pretrained weights to represent each image in a complex and dense feature space, i.e. in a vector. These vectors can be compared to find images which are visually similar. The script in this repository extracts features of each image using the pretrained CNNs VGG16 or ResNet50, and finds similar images using the k-Nearest-Neighbour algorithm. 
+2. **Image Search using Image Embeddings**: Pretrained CNNs can be used to extract image embeddings. In other words, we use the pretrained weights to represent each image in a complex and dense feature space, i.e. in a vector. These vectors can be compared to find images which are visually similar. The script in this repository extracts features of each image using the pretrained CNNs VGG16 and finds similar images using the k-Nearest-Neighbour algorithm. 
  
 ## Usage 
 
@@ -111,6 +111,10 @@ Example output for two images is provided in the `/out` directory.
 
 ## Results and Discussion 
 
+Both scripts have been run two images of the flowers dataset. These images and the three most similar images that have been identified using color histograms and image embeddings are displayed below. From these examples, it can be seen that image search using color histograms can find images of flowers which are fairly similar in e.g. their color. However, only comparison of feature embeddings actually allows finding images of flowers of the same kind.  
+
+Color histrograms can not take into account shapes, textures or any spatial relations. Feature embeddings can take into account more complex aspects of images, such as shapes, textures and spatial relations. Thus, color histograms may be useful to identify identical images, as they will have the same color distribution, but to find rather semantically similar images, feature embeddings might be more useful. 
+
 __Three most similar images to image_0001.jpg:__
 
 Using color histograms:
@@ -130,7 +134,3 @@ Using color histograms:
 Using feature embeddings from VGG16:
 
 <img src="https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_embeddings_top3.png" alt="hist1" width="450"/>
-
-From the images above, it can be seen that while image search using color histograms can find images of flowers which are fairly similar in e.g. their color. However, comparison of extracted features actually allows finding pictures of the same kind of flower. 
-
-Color histrograms can not take into account shapes, textures or any spatial relations. Feature embeddings can take into account more complex aspects of images, such as shapes, textures and spatial relations. Thus, color histograms may be useful to identify the identical images, as they will have the same color distribution, but to find rather semantically similar images, feature embeddings are more useful. 
