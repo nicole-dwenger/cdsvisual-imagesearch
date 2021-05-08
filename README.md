@@ -71,7 +71,7 @@ unzip flowers.zip
 cd ..
 ```
 
-### 3.1. Image Search Using Color Histograms: `img_search_histogram.py`
+### 3.1. Image Search Using Color Histograms: img_search_histogram.py
 
 The script should be run from the `src/` directory:
 ```bash
@@ -85,7 +85,7 @@ python3 img_search_histogram.py
 python3 img_search_histogram.py -t image_0002.jpg
 ```
 
-__Parameters__
+__Parameters:__
 - *-d, --directory : str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
@@ -93,7 +93,7 @@ __Parameters__
   Target image, for which all other images should be compared to find the most similar ones. 
 
 
-__Output__
+__Output:__
 
 The following output will be saved in a directory called `/out`. Examples can be found in `/out` in this directory.
 
@@ -104,7 +104,7 @@ The following output will be saved in a directory called `/out`. Examples can be
   Image with target image and 3 most similar images. 
 
 
-### 3.2. Image Search Using Image Embeddings: `img_search_embeddigs.py`
+### 3.2. Image Search Using Image Embeddings: img_search_embeddigs.py
 
 The script should be run from the `src/` directory:
 ```bash
@@ -129,7 +129,7 @@ __Parameters:__
   Number of k neighbors to extract and save distances for. 
 
 
-__Output:
+__Output:__
 
 The following output will be saved in a directory called `/out`. Examples can be found in `/out` in this directory.
 
