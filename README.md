@@ -45,7 +45,7 @@ cd ..
 
 ### 3. Running the Scripts
 
-#### Image Search Using Color Histograms: `img_search_histogram.py`
+#### `img_search_histogram.py`: Image Search Using Color Histograms
 
 The script should be run from the src directory:
 ```bash
@@ -59,14 +59,14 @@ python3 img_search_histogram.py
 python3 img_search_histogram.py -t image_0002.jpg
 ```
 
-__Parameters:__ 
+</ins>Parameters:</ins>
 - *-d, --directory : str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
 - *-t, --target_img : optional, default:* `image_0001.jpg`\
   Target image, for which all other images should be compared to find the most similar ones. 
 
-__Output:__
+</ins>Output:</ins>
 
 The following output will be saved in a directory called `/out`:
 
@@ -79,7 +79,7 @@ The following output will be saved in a directory called `/out`:
 Example output for three images is provided in the `/out` directory.
 
 
-#### Image Search Using Image Embeddings: `img_search_embeddigs.py`
+#### `img_search_embeddigs.py`: Image Search Using Image Embeddings
 
 The script should be run from the src directory:
 ```bash
@@ -93,7 +93,7 @@ python3 img_search_embeddings.py
 python3 img_search_embeddings.py -t image_0002.jpg
 ```
 
-__Parameters:__ 
+<ins>Parameters:</ins> 
 - *-d, --directory : str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
@@ -103,7 +103,7 @@ __Parameters:__
 - *-k, --k_neighbors : optional, default:* `20`\
   Number of k neighbors to extract and save distances for. 
 
-__Output:__
+</ins>Output:</ins>
 
 The following output will be saved in a directory called `/out`:
 
