@@ -61,7 +61,7 @@ python3 img_search_histogram.py -t image_0002.jpg
 
 __Parameters:__ 
 - *-d, --directory : str, optional, default:*  `../data/flowers`\
-		Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
+  Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
 - *-t, --target_img : optional, default:* `image_0001.jpg`\
   Target image, for which all other images should be compared to find the most similar ones. 
@@ -72,6 +72,7 @@ The following output will be saved in a directory called `/out`:
 
 - *{target_img}_hist.csv:*\ 
   .csv file with filenames and chi-square distances of all images to the target image
+
 - *{target_img}_hist_top3.png:*\
   image with target image and top3 closest images 
 
@@ -108,6 +109,7 @@ The following output will be saved in a directory called `/out`:
 
 - *{target_img}_embeddings.csv:*\
   .csv file with filenames and cosine distances of k nearest images to the target image. 
+
 - *{target_img}_embeddings_top3.png:*\
   Image with target image and 3 most similar images.
 
