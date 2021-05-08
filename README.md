@@ -1,8 +1,9 @@
 # Image Search 
 
-> Image search using (1) color histograms and (2) features embeddings.
 
-This repository contains scripts for two different methods to search for and find similar images: (1) using color histograms and (2) using feature embeddings extracted the pretrained CNN VGG16. The aim of developing scripts for two different methods allows comparison of their their outputs, which is discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
+This repository contains scripts for two different methods to search for and find similar images: (1) using color histograms and (2) using feature embeddings extracted the pretrained CNN VGG16. The aim of developing scripts for two different methods was also to compare of their outputs and usability, which are discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
+
+> [Methods](#methods) | [Repository Structure](#repository-structure) | [Usage](#usage) | [Results and Disucssion](#results-and-discussion)
 
 
 # Methods
@@ -11,10 +12,33 @@ This repository contains scripts for two different methods to search for and fin
 
 2. **Image Search using Image Embeddings**: Pretrained CNNs can be used to extract image embeddings. In other words, we use the pretrained weights to represent each image in a complex and dense feature space, i.e. in a vector. These vectors can be compared to find images which are visually similar. The script in this repository extracts features of each image using the pretrained CNNs VGG16 and finds similar images using the k-Nearest-Neighbour algorithm. 
 
+# Repository Structure
+
+```
+|-- data/								# dir for input data
+	|-- flowers.zip						# example data to run scripts
+
+|-- out/								# dir for output from scripts
+	|-- image_0001_embeddings.csv		# example output
+	|-- image_00001_embeddings.png
+	|-- ...
+
+|-- src/								# image search scripts
+	|-- img_search_embeddings.py		# image search using feature embeddings
+	|-- img_searc_histogram.py			# image search using colorhistograms
+
+|-- utils/								# utilities
+	|-- img_search_utils.py				# utility script, with functions  used across scripts
+
+|-- README.md							
+|-- create_venv.sh						# bash script to recreate virtual environment 
+|-- requirements.txt					# dependencies, installed in virtual environment
+```
+
 
 # Usage 
 
-! The scripts have only been tested on Linux, using Python 3.6.9. 
+**!** The scripts have only been tested on Linux, using Python 3.6.9. 
 
 
 ## 1. Cloning the Repository and Installing Dependencies
