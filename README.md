@@ -2,7 +2,7 @@
 
 > Image search using (1) color histograms and (2) features embeddings.
 
-This repository contains scripts for two different methods to search for and find similar images: (1) using color histograms and (2) using feature embeddings extracted the pretrained CNN VGG16. The aim of developing scripts for two different methods allows comparison of their their outputs, which is discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation. 
+This repository contains scripts for two different methods to search for and find similar images: (1) using color histograms and (2) using feature embeddings extracted the pretrained CNN VGG16. The aim of developing scripts for two different methods allows comparison of their their outputs, which is discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
 
 ## Methods
 
@@ -74,7 +74,7 @@ The following output will be saved in a directory called `/out`:
   CSV file with filenames and chi-square distances of all images to the target image
 
 - *{target_img}_hist_top3.png:*\
-  image with target image and top3 closest images 
+  Image with target image and 3 most similar images. 
 
 Example output for three images is provided in the `/out` directory.
 
