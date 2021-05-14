@@ -20,7 +20,6 @@ Input:
 Output stored in ../out:
   - {target_img}_hist.csv: csv file with filename and chi-square distance from target image
   - {target_img}_hist_top3.png: image with target image and top3 closest images 
-
 """
 
 
