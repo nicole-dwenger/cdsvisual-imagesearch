@@ -1,29 +1,28 @@
 #!/usr/bin/env python
 
 """
-Image Search using Image Embeddings: From a collection of images, find k nearest neighbours for a target image using pretrained convolutional neural networks (ResNet50 or VGG16)
+Image Search using Image Embeddings: From a collection of images, find k nearest neighbours for a target image using pretrained convolutional neural network (VGG16)
 
-For directory containing images and specified target image
+For directory containing images and specified target image:
   - Get all filepaths of images
-  - Load pretrained CNN (ResNet50 or VGG16)
+  - Load pretrained CNN (VGG16)
   - For each image: 
-       - Preprocess it
+       - Resize it, prepreprocess it
        - Extract its features (embeddings) using the CNN
-  - Append features of all images to a feature_list
+  - Append features of all images to a feature list
   - Find k nearest neighbors
   - For target image: 
-       - Print and save the 10 nearest neighbors and distances
+       - Print and save the k nearest neighbors and distances
        - Save a print a plot of the target image and the 3 nearest neighbors
 
 Input: 
-  - -p, --path_to_images: str, <path-to-images> (optional, default: "../data/flowers"
+  - -d, --directory: str, <path-to-image-directory> (optional, default: "../data/flowers"
   - -t --target_image: str, <name-of-target> (optional, default: image_0001.jpg)
   - -k --k_neighbors: int, <number-of-neighbors> (optional, default: 20)
 
 Output saved in ../out:
-  - csv file of cosine distances of k-nearest neighbors, 1st nearest neighbor printed to command lines
-  - Image file of target image and 3 nearest neighbors, saved in "out" directory
-
+  - csv file of cosine distances of k nearest neighbors, 1st nearest neighbor printed to command lines
+  - Image file of target image and 3 nearest neighbors
 """
 
 # LIBRARIES ------------------------------------
@@ -49,7 +48,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow_hub as hub
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
-from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 
 # Matplotlib for Visualisations
 import matplotlib.pyplot as plt 
@@ -103,7 +101,7 @@ def main():
     out_df = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_embeddings.csv")
     df.to_csv(out_df) 
     
-    # Plot target neighbors 
+    # Plot and save target neighbors 
     out_plot = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_embeddings_top3.png")
     plot_similar(img_dir, target_img, df, out_plot)
     
@@ -119,6 +117,7 @@ def extract_features(img_paths, model, input_shape):
     For each image: Load the image, preprocess it to fit to the model, 
     extract features, flatten and normalise features, append features to feature_list.
     - img_paths: list of paths to images
+    - model: model to use for feature extraction
     - input_shape: size to reshape images to for model
     Returns: list of extracted features for all images
     """
@@ -156,6 +155,7 @@ def get_neighbors(img_paths, k_neighbors, feature_list, target_index):
     - n_neighbors = number of neighbors to extract
     - feature_list = list of extracted features
     - target_img: index of target image
+    Returns: df with filename of nearest neighbors and cosine distannce to target
     """
     # Initilaise nearest neighbors algorithm 
     neighbors = NearestNeighbors(n_neighbors=k_neighbors, 

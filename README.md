@@ -1,34 +1,44 @@
 # Image Search 
 
-> [Methods](#methods) | [Repository Structure](#repository-structure) | [Usage](#usage) | [Results and Disucssion](#results-and-discussion) |
+[Description](#description) | [Methods](#methods) | [Repository Structure](#repository-structure) | [Usage](#usage) | [Results and Disucssion](#results-and-discussion) | 
 
-This repository contains scripts for two different methods to search for and find similar images: (1) using color histograms and (2) using feature embeddings extracted the pretrained CNN VGG16. The aim of developing scripts for two different methods was also to compare of their outputs and usability, which are discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
+## Description
+
+> This project relates to Assignment 2: Visual Image Search of the course Visual Analytics
+
+This repository contains scripts for two different methods to find images which are similar to a target image: (1) using color histograms and (2) using feature embeddings extracted the pretrained CNN VGG16. The aim of developing scripts for two different methods was also to compare of their outputs and usability, which are discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
 
 
 ## Methods
 
-1. **Image Search using Color Histograms**: Images can be represented by their distribution of color. In an RGB color space, color histograms display the how often each pixel intensity (between 0-255) occurs in each of the three color channels for a given image. These distributions can be compared using different distance metrics. The script in this repository extracts color distributions of each of the images and identifies similar images using the chi-square distance measure.
+### Data
+For this project, the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/), containing 80 images for 17 different categories (total of 1360). 
 
-2. **Image Search using Image Embeddings**: Pretrained CNNs can be used to extract image embeddings. In other words, we use the pretrained weights to represent each image in a complex and dense feature space, i.e. in a vector. These vectors can be compared to find images which are visually similar. The script in this repository extracts features of each image using the pretrained CNNs VGG16 and finds similar images using the k-Nearest-Neighbour algorithm. 
+### Image Search using Color Histograms
+Images can be represented by their distribution of color. In an RGB color space, color histograms display the how often each pixel intensity (between 0-255) occurs in each of the three color channels for a given image. These distributions can be compared using different distance metrics. The script in this repository extracts color distributions of each of the images and identifies similar images using the chi-square distance measure.
+
+### Image Search using Image Embeddings
+Pretrained CNNs can be used to extract image embeddings. In other words, pretrained weights are predict a dense feature space, i.e. vector for a given image. These vectors can be compared to find images which are visually similar. To do this, images were resized to fit to the input shape of VGG16, i.e. 224x224x3. The script in this repository extracts features of each resized image using the pretrained CNNs VGG16 and finds similar images using the k-Nearest-Neighbour algorithm. 
 
 
 ## Repository Structure
 
 ```
-|-- data/                               # dir for input data
-    |-- flowers.zip                     # example data to run scripts
+|-- data/                               # directory for input data
+    |-- flowers.zip                     # .zip data to run scripts 
 
-|-- out/                                # dir for output from scripts
-    |-- image_0001_embeddings.csv       # example output
-    |-- image_00001_embeddings.png
-    |-- ...
+|-- out/                                # directory for output from scripts
+    |-- image_0001_embeddings.csv       # example output: csv file with similar images using feature embeddings
+    |-- image_0001_embeddings_top3.png  # example output: png with target image and 3 clostest images using feature embedddings
+    |-- image_0001_hist.csv             # example output: csv file with silimiar images using color histograms
+    |-- image_0001_hist_top3.png        # exmaple output: png with target image and 3 clostest images using histograms
 
 |-- src/                                # image search scripts
     |-- img_search_embeddings.py        # image search using feature embeddings
-    |-- img_searc_histogram.py          # image search using colorhistograms
+    |-- img_search_histogram.py         # image search using color histograms
 
 |-- utils/                              # utilities
-    |-- img_search_utils.py             # utility script, with functions  used across scripts
+    |-- img_search_utils.py             # utility script, with functions used across scripts
 
 |-- README.md
 |-- create_venv.sh                      # bash script to recreate virtual environment 
@@ -43,7 +53,7 @@ This repository contains scripts for two different methods to search for and fin
 
 ### 1. Cloning the Repository and Installing Dependencies
 
-To run the scripts, I recommend cloning this repository and installing necessary dependencies in a virtual environment. The bash script `create_venv.sh` can be used to create this virtual environment with all necessary dependencies, listed in the `requirements.txt` file. The following commands can be used:
+To run the scripts, I recommend cloning this repository and installing necessary dependencies in a virtual environment. The bash script `create_venv.sh` can be used to create a virtual environment called `venv_imagesearch` with all necessary dependencies, listed in the `requirements.txt` file. The following commands can be used:
 
 ```bash
 # cloning the repository
@@ -61,8 +71,7 @@ source venv_imagesearch/bin/activate
 
 
 ### 2. Data
-
-Both image search scripts were run on the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/). A zip file of this dataset callsed `flowers.zip` is in the `data` directory, and should be unzipped to run the script. If you wish to run the script on your own image files, they should have one of the following extensions (.jpg, .JPG, .jpeg, .JPEG, .png, .PNG), and the `--path` argument needs to be specified when running the script (see below). 
+A zip file of the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) called `flowers.zip` is in the `data` directory, and should be unzipped to run the script. If you wish to run the script on your own image files, they should have one of the following extensions (.jpg, .JPG, .jpeg, .JPEG, .png, .PNG), and the `--path` argument needs to be specified when running the script (see below). 
 
 ```bash
 # unzip files

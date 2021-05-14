@@ -6,9 +6,13 @@ Utility functions for image search
   - plot_similar: plot target image and three most similar images (based on distances and filenames stored in df)
 """
 
+# LIBRARIES ------------------------------------
+
 import os
 import matplotlib.pyplot as plt
 
+
+# UTILITY FUNCTIONS ------------------------------------
 
 def get_paths(img_dir):
     """
@@ -44,6 +48,7 @@ def plot_similar(img_dir, target_img, df, out_plot):
     - target_img: name of target image
     - df: dataframe containing filenames and distances 
     - out_plot: path where plot should be stored
+    Saves: plot in out_plot
     """
     
     # Get path to the target image
