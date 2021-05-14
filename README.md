@@ -105,10 +105,10 @@ __Parameters:__
 
 
 __Output__ saved in `/out`:
-- `{target_img}_hist.csv`:*\
+- `{target_img}_hist.csv`\
   CSV file with filenames and chi-square distances of all images to the target image
 
-- `{target_img}_hist_top3.png`:*\
+- `{target_img}_hist_top3.png`\
   Image with target image and 3 most similar images. 
 
 
@@ -138,7 +138,7 @@ __Parameters:__
 
 
 __Output__ saved in `/out`:
-- `{target_img}_embeddings.csv`:\
+- `{target_img}_embeddings.csv`\
   CSV file with filenames and cosine distances of k nearest images to the target image. 
 
 - `{target_img}_embeddings_top3.png`\
