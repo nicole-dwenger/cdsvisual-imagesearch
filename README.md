@@ -151,14 +151,14 @@ Color histrograms cannot take into account shapes, textures or any spatial relat
 
 __Three most similar images to image_0001.jpg:__
 
- 1. using color histograms | 2. using feature embeddings
+ (1) using color histograms | (2) using feature embeddings
 :-------------------------:|:-------------------------:
 ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_hist_top3.png)  |  ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_embeddings_top3.png)
 
 
 __Three most similar images to image_0300.jpg:__
 
- 1. using color histograms | 2. using feature embeddings
+ (1) using color histograms | (2) using feature embeddings
 :-------------------------:|:-------------------------:
 ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_hist_top3.png)  |  ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_embeddings_top3.png)
 
