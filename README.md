@@ -6,19 +6,22 @@
 
 > This project relates to Assignment 2: Visual Image Search of the course Visual Analytics
 
-This repository contains scripts for two different methods to find images which are similar to a target image: (1) using color histograms and (2) using feature embeddings extracted the pretrained CNN VGG16. The aim of developing scripts for two different methods was also to compare of their outputs and usability, which are discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
+This repository contains scripts for two different methods to find images which are similar to a target image: 
+1. Image search using olor histograms
+2. Image search using transfer learning, i.e. feature embeddings extracted from the pretrained model VGG16
+The aim of developing scripts for two different methods was also to compare of their outputs and usability, which are discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
 
 
 ## Methods
 
 ### Data
-For this project, the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/), containing 80 images for 17 different categories (total of 1360). 
+For this project, the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/), containing 80 images for 17 different categories (total of 1360) was used. 
 
-### Image Search using Color Histograms
+### 1.  Image search using color histograms
 Images can be represented by their distribution of color. In an RGB color space, color histograms display the how often each pixel intensity (between 0-255) occurs in each of the three color channels for a given image. These distributions can be compared using different distance metrics. The script in this repository extracts color distributions of each of the images and identifies similar images using the chi-square distance measure.
 
-### Image Search using Image Embeddings
-Pretrained CNNs can be used to extract image embeddings. In other words, pretrained weights are predict a dense feature space, i.e. vector for a given image. These vectors can be compared to find images which are visually similar. To do this, images were resized to fit to the input shape of VGG16, i.e. 224x224x3. The script in this repository extracts features of each resized image using the pretrained CNNs VGG16 and finds similar images using the k-Nearest-Neighbour algorithm. 
+### 2. Image search using image embeddings
+Pretrained CNNs can be used to extract image embeddings. In other words, pretrained weights are predict a dense feature space, i.e. vector for a given image. These vectors can be compared to find images which are visually similar. To do this, images were resized to fit to the input shape of VGG16, i.e. 224x224x3. The script in this repository extracts features of each resized image using the pretrained CNN VGG16 and finds similar images using the k-Nearest-Neighbour algorithm. 
 
 
 ## Repository Structure
@@ -80,7 +83,7 @@ unzip flowers.zip
 cd ..
 ```
 
-### 3.1. Image Search Using Color Histograms: img_search_histogram.py
+### 3.1. Image search using color histograms: img_search_histogram.py
 
 The script should be run from the `src/` directory:
 ```bash
@@ -102,10 +105,7 @@ __Parameters:__
   Target image, for which all other images should be compared to find the most similar ones. 
 
 
-__Output:__
-
-The following output will be saved in a directory called `/out`. Examples can be found in `/out` in this directory.
-
+__Output__ saved in `/out`:
 - *{target_img}_hist.csv:*\
   CSV file with filenames and chi-square distances of all images to the target image
 
@@ -113,7 +113,7 @@ The following output will be saved in a directory called `/out`. Examples can be
   Image with target image and 3 most similar images. 
 
 
-### 3.2. Image Search Using Image Embeddings: img_search_embeddigs.py
+### 3.2. Image search using image embeddings: img_search_embeddigs.py
 
 The script should be run from the `src/` directory:
 ```bash
@@ -151,26 +151,20 @@ The following output will be saved in a directory called `/out`. Examples can be
 
 ## Results and Discussion 
 
-Both scripts have been run two images of the flowers dataset. These images and the three most similar images that have been identified using color histograms and image embeddings are displayed below. From these examples, it can be seen that image search using color histograms can find images of flowers which are fairly similar in e.g. their color. However, only comparison of feature embeddings actually allows finding images of flowers of the same kind.  
+Both scripts have been run on two images of the flowers dataset. These images and thee three most similar images that have been identified using (1) color histograms and (2) image embeddings are displayed below. From these examples, it can be seen that image search using color histograms can find images of flowers which are fairly similar in e.g. their color. However, only comparison of feature embeddings actually allows finding images of flowers of the same kind.  
 
-Color histrograms can not take into account shapes, textures or any spatial relations. Feature embeddings can take into account more complex aspects of images, such as shapes, textures and spatial relations. Thus, color histograms may be useful to identify identical images, as they will have the same color distribution, but to find rather semantically similar images, feature embeddings might be more useful. 
+Color histrograms cannot take into account shapes, textures or any spatial relations. Feature embeddings can take into account more complex aspects of images, such as shapes, textures and spatial relations. Thus, color histograms may be useful to identify identical images, as they will have the same color distribution, but to find rather semantically similar images, feature embeddings might be more useful. 
 
 __Three most similar images to image_0001.jpg:__
 
-Using color histograms:
+ (1) using color histograms | (2) using feature embeddings
+:-------------------------:|:-------------------------:
+![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_hist_top3.png)  |  ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_embeddings_top3.png)
 
-<img src="https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_hist_top3.png" alt="hist1" width="450"/>
-
-Using feature embeddings from VGG16:
-
-<img src="https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_embeddings_top3.png" alt="hist1" width="450"/>
 
 __Three most similar images to image_0300.jpg:__
 
-Using color histograms:
+ (1) using color histograms | (2) using feature embeddings
+:-------------------------:|:-------------------------:
+![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_hist_top3.png)  |  ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_embeddings_top3.png)
 
-<img src="https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_hist_top3.png" alt="hist1" width="450"/>
-
-Using feature embeddings from VGG16:
-
-<img src="https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_embeddings_top3.png" alt="hist1" width="450"/>
