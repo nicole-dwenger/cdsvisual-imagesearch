@@ -100,7 +100,7 @@ __Parameters:__
 - `-d, --directory`: *str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
-- `-t, --target_img`: *optional, default:* `image_0001.jpg`\
+- `-t, --target_img`: *str, optional, default:* `image_0001.jpg`\
   Target image, for which all other images should be compared to find the most similar ones. 
 
 
@@ -130,10 +130,10 @@ __Parameters:__
 - `-d, --directory`: *str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
-- `-t, --target_img`: *optional, default:* `image_0001.jpg`\
+- `-t, --target_img`: *str, optional, default:* `image_0001.jpg`\
   Target image, for which all other images should be compared to find the most similar ones. 
 
-- `-k, --k_neighbors`: *optional, default:* `20`\
+- `-k, --k_neighbors`: *int, optional, default:* `20`\
   Number of k neighbors to extract and save distances for. 
 
 
