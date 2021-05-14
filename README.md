@@ -6,19 +6,21 @@
 
 > This project relates to Assignment 2: Visual Image Search of the course Visual Analytics
 
-This repository contains scripts for two different methods to find images which are similar to a target image (1) using olor histograms and (2) using transfer learning, i.e. feature embeddings extracted from the pretrained model VGG16. The aim of developing scripts for two different methods was also to compare of their outputs and usability, which are discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
+The purpose of the project was develop a tool to find similar images to a given target image. This can be useful to identify duplicates or sort images in clusters. Further, it could be practically implemented as an image recommender, i.e., *if you like this image, you might also like these images*.
+
+This repository contains scripts for two different methods to find images which are similar to a target image (1) using olor histograms and (2) using transfer learning, i.e. feature embeddings extracted from the pretrained model VGG16. The aim of developing scripts for two different methods was also to compare of their outputs and usability, which are discussed below. 
 
 
 ## Methods
 
 ### Data
-For this project, the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/), containing 80 images for 17 different categories (total of 1360) was used. 
+For this project, the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) was used. This dataset contains 80 images for 17 different categories (total of 1360 images). 
 
 ### 1.  Image search using color histograms
 Images can be represented by their distribution of color. In an RGB color space, color histograms display the how often each pixel intensity (between 0-255) occurs in each of the three color channels for a given image. These distributions can be compared using different distance metrics. The script in this repository extracts color distributions of each of the images and identifies similar images using the chi-square distance measure.
 
 ### 2. Image search using image embeddings
-Pretrained CNNs can be used to extract image embeddings. In other words, pretrained weights are predict a dense feature space, i.e. vector for a given image. These vectors can be compared to find images which are visually similar. To do this, images were resized to fit to the input shape of VGG16, i.e. 224x224x3. The script in this repository extracts features of each resized image using the pretrained CNN VGG16 and finds similar images using the k-Nearest-Neighbour algorithm. 
+Pre-trained CNNs can be used to extract image embeddings. In other words, pre-trained weights are used to predict a dense feature space, i.e., vector for each image. These vectors can be compared to find images which are visually similar. In this project, the pre-trained model VGG16 is used to extract features of each image. These feature representations are then fed into a k Nearest Neighbour algorithm, to find the k most similar images to a given target image. 
 
 
 ## Repository Structure
@@ -63,7 +65,7 @@ git clone https://github.com/nicole-dwenger/cdsvisual-imagesearch.git
 cd cdsvisual-imagesearch
 
 # install virtual environment
-bash create_vision_venv.sh
+bash create_venv.sh
 
 # activate virtual environment 
 source venv_imagesearch/bin/activate
@@ -71,7 +73,7 @@ source venv_imagesearch/bin/activate
 
 
 ### 2. Data
-A zip file of the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) called `flowers.zip` is in the `data` directory, and should be unzipped to run the script. If you wish to run the script on your own image files, they should have one of the following extensions (.jpg, .JPG, .jpeg, .JPEG, .png, .PNG), and the `--path` argument needs to be specified when running the script (see below). 
+A zip file of the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) called `flowers.zip` is in the `data` directory, and should be unzipped to run the script. The script can also be run on a different set of images with the following extensions .jpg, .JPG, .jpeg, .JPEG, .png, .PNG,  by setting the —path argument (see below). 
 
 ```bash
 # unzip files
@@ -144,10 +146,9 @@ __Output__ saved in `/out`:
 
 
 ## Results and Discussion 
+Both scripts were used to find similar images to two different target images (displayed below). From these examples, it can be seen that image search using color histograms could identify images which are fairly similar in e.g. their color. However, the use of feature embeddings actually allowed to find images of the same kind of flower. 
 
-Both scripts have been run on two images of the flowers dataset. These images and thee three most similar images that have been identified using (1) color histograms and (2) image embeddings are displayed below. From these examples, it can be seen that image search using color histograms can find images of flowers which are fairly similar in e.g. their color. However, only comparison of feature embeddings actually allows finding images of flowers of the same kind.  
-
-Color histrograms cannot take into account shapes, textures or any spatial relations. Feature embeddings can take into account more complex aspects of images, such as shapes, textures and spatial relations. Thus, color histograms may be useful to identify identical images, as they will have the same color distribution, but to find rather semantically similar images, feature embeddings might be more useful. 
+Color histograms cannot take into account shapes, textures or any spatial relations. However, feature embeddings can take into account more complex aspects of images, such as shapes, textures and spatial relations. Thus, color histograms may be useful to identify identical images, as they will have the same color distribution, but feature embeddings are more useful to find rather semantically similar images.  
 
 __Three most similar images to image_0001.jpg:__
 
