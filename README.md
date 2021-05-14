@@ -1,4 +1,4 @@
-# Image Search 
+# Image Search: Color Histograms vs Feature Embeddings
 
 [Description](#description) | [Methods](#methods) | [Repository Structure](#repository-structure) | [Usage](#usage) | [Results and Disucssion](#results-and-discussion) | 
 
@@ -6,10 +6,7 @@
 
 > This project relates to Assignment 2: Visual Image Search of the course Visual Analytics
 
-This repository contains scripts for two different methods to find images which are similar to a target image: 
-1. Image search using olor histograms
-2. Image search using transfer learning, i.e. feature embeddings extracted from the pretrained model VGG16
-The aim of developing scripts for two different methods was also to compare of their outputs and usability, which are discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
+This repository contains scripts for two different methods to find images which are similar to a target image (1) using olor histograms and (2) using transfer learning, i.e. feature embeddings extracted from the pretrained model VGG16. The aim of developing scripts for two different methods was also to compare of their outputs and usability, which are discussed below. Finding similar images can have simple, practical motivations, e.g. sorting images, but it can also be used for e.g. image recommendation.
 
 
 ## Methods
@@ -138,10 +135,7 @@ __Parameters:__
   Number of k neighbors to extract and save distances for. 
 
 
-__Output:__
-
-The following output will be saved in a directory called `/out`. Examples can be found in `/out` in this directory.
-
+__Output__ saved in `/out`:
 - *{target_img}_embeddings.csv:*\
   CSV file with filenames and cosine distances of k nearest images to the target image. 
 
@@ -157,14 +151,14 @@ Color histrograms cannot take into account shapes, textures or any spatial relat
 
 __Three most similar images to image_0001.jpg:__
 
- (1) using color histograms | (2) using feature embeddings
+ 1. using color histograms | 2. using feature embeddings
 :-------------------------:|:-------------------------:
 ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_hist_top3.png)  |  ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_embeddings_top3.png)
 
 
 __Three most similar images to image_0300.jpg:__
 
- (1) using color histograms | (2) using feature embeddings
+ 1. using color histograms | 2. using feature embeddings
 :-------------------------:|:-------------------------:
 ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_hist_top3.png)  |  ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_embeddings_top3.png)
 
