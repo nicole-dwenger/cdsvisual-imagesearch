@@ -26,25 +26,25 @@ Pre-trained CNNs can be used to extract image embeddings. In other words, pre-tr
 ## Repository Structure
 
 ```
-|-- data/                               # directory for input data
+|-- data/                               # Directory for input data
     |-- flowers.zip                     # .zip data to run scripts 
 
-|-- out/                                # directory for output from scripts
-    |-- image_0001_embeddings.csv       # example output: csv file with similar images using feature embeddings
-    |-- image_0001_embeddings_top3.png  # example output: png with target image and 3 clostest images using feature embedddings
-    |-- image_0001_hist.csv             # example output: csv file with silimiar images using color histograms
-    |-- image_0001_hist_top3.png        # exmaple output: png with target image and 3 clostest images using histograms
+|-- out/                                # Directory for output from scripts
+    |-- image_0001_embeddings.csv       # Example output: csv file with similar images using feature embeddings
+    |-- image_0001_embeddings_top3.png  # Example output: png with target image and 3 clostest images using feature embedddings
+    |-- image_0001_hist.csv             # Example output: csv file with silimiar images using color histograms
+    |-- image_0001_hist_top3.png        # Exmaple output: png with target image and 3 clostest images using histograms
 
-|-- src/                                # image search scripts
-    |-- img_search_embeddings.py        # image search using feature embeddings
-    |-- img_search_histogram.py         # image search using color histograms
+|-- src/                                # Image search scripts
+    |-- img_search_embeddings.py        # Image search using feature embeddings
+    |-- img_search_histogram.py         # Image search using color histograms
 
-|-- utils/                              # utilities
-    |-- img_search_utils.py             # utility script, with functions used across scripts
+|-- utils/                              # Utilities
+    |-- img_search_utils.py             # Utility script, with functions used across scripts
 
 |-- README.md
-|-- create_venv.sh                      # bash script to recreate virtual environment 
-|-- requirements.txt                    # dependencies, installed in virtual environment
+|-- create_venv.sh                      # Bash script to recreate virtual environment 
+|-- requirements.txt                    # Dependencies, installed in virtual environment
 ```
 
 
@@ -97,18 +97,18 @@ python3 img_search_histogram.py -t image_0002.jpg
 ```
 
 __Parameters:__
-- *-d, --directory : str, optional, default:*  `../data/flowers`\
+- `-d, --directory`: *str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
-- *-t, --target_img : optional, default:* `image_0001.jpg`\
+- `-t, --target_img`: *optional, default:* `image_0001.jpg`\
   Target image, for which all other images should be compared to find the most similar ones. 
 
 
 __Output__ saved in `/out`:
-- *{target_img}_hist.csv:*\
+- `{target_img}_hist.csv`:*\
   CSV file with filenames and chi-square distances of all images to the target image
 
-- *{target_img}_hist_top3.png:*\
+- `{target_img}_hist_top3.png`:*\
   Image with target image and 3 most similar images. 
 
 
@@ -127,21 +127,21 @@ python3 img_search_embeddings.py -t image_0002.jpg
 ```
 
 __Parameters:__
-- *-d, --directory : str, optional, default:*  `../data/flowers`\
+- `-d, --directory`: *str, optional, default:*  `../data/flowers`\
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
-- *-t, --target_img : optional, default:* `image_0001.jpg`\
+- `-t, --target_img`: *optional, default:* `image_0001.jpg`\
   Target image, for which all other images should be compared to find the most similar ones. 
 
-- *-k, --k_neighbors : optional, default:* `20`\
+- `-k, --k_neighbors`: *optional, default:* `20`\
   Number of k neighbors to extract and save distances for. 
 
 
 __Output__ saved in `/out`:
-- *{target_img}_embeddings.csv:*\
+- `{target_img}_embeddings.csv`:\
   CSV file with filenames and cosine distances of k nearest images to the target image. 
 
-- *{target_img}_embeddings_top3.png:*\
+- `{target_img}_embeddings_top3.png`\
   Image with target image and 3 most similar images.
 
 
