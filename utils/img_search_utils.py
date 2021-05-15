@@ -17,8 +17,10 @@ import matplotlib.pyplot as plt
 def get_paths(img_dir):
     """
     Getting filepaths to all images with defined extensions.
-    - directory: str, directory where images are stored  
-    Returns:  list of filepaths as str to images in directory
+    Input: 
+      - directory: str, directory where images are stored  
+    Returns:  
+      - List of filepaths as str to images in directory
     """
     # Define list of valid extensions
     extensions = [".jpg", ".JPG", ".jpeg", ".JPEG", ".png", ".PNG"]
@@ -44,10 +46,11 @@ def get_paths(img_dir):
 def plot_similar(img_dir, target_img, df, out_plot):
     """
     Create and Save plot of target image and the three most similar images 
-    - img_dir: directory to all images
-    - target_img: name of target image
-    - df: dataframe containing filenames and distances 
-    - out_plot: path where plot should be stored
+    Input: 
+      - img_dir: directory to all images
+      - target_img: name of target image
+      - df: dataframe containing filenames and distances 
+      - out_plot: path where plot should be stored
     Saves: plot in out_plot
     """
     

@@ -16,7 +16,7 @@ For directory containing images and specified target image:
        - Save a print a plot of the target image and the 3 nearest neighbors
 
 Input: 
-  - -d, --directory: str, <path-to-image-directory> (optional, default: "../data/flowers"
+  - -d, --directory: str, <path-to-image-directory> (optional, default: ../data/flowers
   - -t --target_image: str, <name-of-target> (optional, default: image_0001.jpg)
   - -k --k_neighbors: int, <number-of-neighbors> (optional, default: 20)
 
@@ -24,6 +24,7 @@ Output saved in ../out:
   - csv file of cosine distances of k nearest neighbors, 1st nearest neighbor printed to command lines
   - Image file of target image and 3 nearest neighbors
 """
+
 
 # LIBRARIES ------------------------------------
 
@@ -82,7 +83,7 @@ def main():
     # Print message
     print(f"\n[INFO] Initialising image search for {target_img} using features extracted from VGG16.")
     
-    # Define input shape and load pretrained model
+    # Define input shape and load pretrained model (VGG16)
     input_shape = (224,244,3)
     model = VGG16(weights='imagenet', include_top=False, pooling='avg', input_shape=input_shape)
     
@@ -116,10 +117,12 @@ def extract_features(img_paths, model, input_shape):
     """
     For each image: Load the image, preprocess it to fit to the model, 
     extract features, flatten and normalise features, append features to feature_list.
-    - img_paths: list of paths to images
-    - model: model to use for feature extraction
-    - input_shape: size to reshape images to for model
-    Returns: list of extracted features for all images
+    Input:
+      - img_paths: list of paths to images
+      - model: model to use for feature extraction
+      - input_shape: size to reshape images to for model
+    Returns: 
+      - list of extracted features for all images
     """
     # Create empty list for features of all images
     feature_list = []
@@ -152,10 +155,12 @@ def extract_features(img_paths, model, input_shape):
 def get_neighbors(img_paths, k_neighbors, feature_list, target_index):
     """
     Get the neighbors and distances of the target image
-    - n_neighbors = number of neighbors to extract
-    - feature_list = list of extracted features
-    - target_img: index of target image
-    Returns: df with filename of nearest neighbors and cosine distannce to target
+    Input:
+      - k_neighbors = number of neighbors to extract
+      - feature_list = list of extracted features
+      - target_img: index of target image
+    Returns: 
+      - df with filename of nearest neighbors and cosine distannce to target
     """
     # Initilaise nearest neighbors algorithm 
     neighbors = NearestNeighbors(n_neighbors=k_neighbors, 

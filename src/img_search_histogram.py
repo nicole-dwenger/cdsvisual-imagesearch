@@ -14,7 +14,7 @@ For directory containing images and specified target image:
   - Save a plot of the target image and the 3 most similar images
 
 Input:
-  - -d, --directory, str <directory-of-images> (optional, default: data/flowers)
+  - -d, --directory, str <directory-of-images> (optional, default: ../data/flowers)
   - -t, --target_img, str <name-of-target-img> (optional, default: image_0001.jpg)
 
 Output stored in ../out:
@@ -61,7 +61,7 @@ def main():
     
     # Get file paths to target image
     target_path = os.path.join(img_dir, target_img)
-    # Get file paths to all other images, without the target path
+    # Get file paths to all other images, remove the target path
     img_paths = get_paths(img_dir)
     img_paths.remove(target_path)
     
@@ -113,8 +113,10 @@ def main():
 def get_histogram(img_path):
     """
     Generate normalised color histogram for RGB image stored in img_path
-    - img_path: path to image as str
-    Returns: normalised color histogram
+    Input: 
+      - img_path: path to image as str
+    Returns:
+      - Normalised color histogram
     """
     # Load image
     img = cv2.imread(str(img_path))
