@@ -16,7 +16,7 @@ Two scripts were developed, which use different methods to find similar images f
 ### Data
 For this project, the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) was used. This dataset contains 80 images for 17 different categories (a total of 1360 images). 
 
-### 1.  Image search using coulor histograms
+### 1.  Image search using colour histograms
 Images can be represented by their distribution of color. In RGB colour space, colour histograms display how often each pixel intensity (0-255) occurs in each of the three colour channels for a given image. Thus, colour histograms were extracted for each of the images, and compared to the histogram of the target image. Similarity was measured using the chi-square distance measure. 
 
 ### 2. Image search using image embeddings
@@ -72,7 +72,7 @@ source venv_imagesearch/bin/activate
 
 
 ### 2. Data
-A zip file of the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) called `flowers.zip` is in the `data` directory, and should be unzipped to run the script. The script can also be run on a different set of images with the following extensions .jpg, .JPG, .jpeg, .JPEG, .png, .PNG,  by setting the --path argument (see below). 
+A zip file of the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) called `flowers.zip` is in the `data` directory, and should be unzipped to run the script. The script can also be run on a different set of images with the following extensions .jpg, .JPG, .jpeg, .JPEG, .png, .PNG,  by setting the `--path` argument (see below). 
 
 ```bash
 # unzip files
@@ -103,7 +103,7 @@ __Parameters:__
   Target image, for which all other images should be compared to find the most similar ones. 
 
 
-__Output__ saved in `/out`:
+__Output__ saved in `out/`:
 - `{target_img}_hist.csv`\
   CSV file with filenames and chi-square distances of all images to the target image
 
@@ -136,7 +136,7 @@ __Parameters:__
   Number of k neighbors to extract and save distances for. 
 
 
-__Output__ saved in `/out`:
+__Output__ saved in `out/`:
 - `{target_img}_embeddings.csv`\
   CSV file with filenames and cosine distances of k nearest images to the target image. 
 
