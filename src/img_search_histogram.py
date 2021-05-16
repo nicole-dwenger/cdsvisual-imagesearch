@@ -80,9 +80,9 @@ def main():
         img_name = os.path.split(img_path)[1]
         # Get the histogram of the image
         img_hist = get_histogram(img_path)
-        # Calculate the distance of the image
+        # Calculate the distance of the image by comparing the target and image histogram
         distance = round(cv2.compareHist(target_hist, img_hist, cv2.HISTCMP_CHISQR), 2)
-        # Append data to dataframe
+        # Append filename and distance to dataframe
         df = df.append({"filename": img_name, 
                          "chisquare_distance": distance}, ignore_index = True)
 
@@ -95,11 +95,11 @@ def main():
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
     
-    # Save data frame 
+    # Save data frame in output directory
     out_df = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_hist.csv")
     df.to_csv(out_df)
     
-    # Save plot with similar images
+    # Save plot with similar images in output directory
     out_plot = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_hist_top3.png")
     plot_similar(img_dir, target_img, df, out_plot)
 
@@ -121,7 +121,7 @@ def get_histogram(img_path):
     # Load image
     img = cv2.imread(str(img_path))
                    
-    # Calculate histgram for RGB color channels 
+    # Calculate histogram for RGB color channels 
     hist = cv2.calcHist([img], [0,1,2], None, [8,8,8], [0,256, 0,256, 0,256])
     
     # Normalise the histogram with min max regularisation

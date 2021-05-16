@@ -90,7 +90,7 @@ def main():
     # Extract features of all images 
     feature_list = extract_features(img_paths, model, input_shape)
     
-    # Get nearest neighbors of target image, and store name and distance in df
+    # Get k nearest neighbors of target image, and store name and distance in df
     df = get_neighbors(img_paths, k_neighbors, feature_list, target_index)
     
     # Define output directory
@@ -98,11 +98,11 @@ def main():
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
         
-    # Save data frame 
+    # Save data frame in output directory
     out_df = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_embeddings.csv")
     df.to_csv(out_df) 
     
-    # Plot and save target neighbors 
+    # Plot and save target neighbors in output directory
     out_plot = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_embeddings_top3.png")
     plot_similar(img_dir, target_img, df, out_plot)
     

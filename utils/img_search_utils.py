@@ -63,7 +63,7 @@ def plot_similar(img_dir, target_img, df, out_plot):
     path2 = os.path.join(img_dir, top2)
     path3 = os.path.join(img_dir, top3)
 
-    # Define grid
+    # Define grid, 1 at top, 3 at bottom
     ax1 = plt.subplot2grid((2, 3), (0, 0), colspan=3)
     ax2 = plt.subplot2grid((2, 3), (1, 0))
     ax3 = plt.subplot2grid((2, 3), (1, 1))
