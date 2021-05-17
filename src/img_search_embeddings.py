@@ -133,12 +133,11 @@ def extract_features(img_path, input_shape, model):
       - normalized_features: list of normalised features for img
     """
     # Load the image fitted to the input shape
-    img = load_img(img_path, target_size=(input_shape[0],input_shape[1]))
-        
-    # Turn image to array and add dimension at the beginning
+    img = load_img(img_path, target_size=(input_shape[0],input_shape[1]))    
+    # Turn image to array
     img_array = img_to_array(img)
+    # Add dimension to the beginning of array
     expanded_img_array = np.expand_dims(img_array, axis=0)
-
     # Preprocess image for VGG16
     preprocessed_img = preprocess_input(expanded_img_array)
 
@@ -154,11 +153,13 @@ def get_target_neighbors(img_paths, target_index, feature_list, k_neighbors):
     """
     Get the neighbors and distances of the target image
     Input:
+      - img_paths: paths to all images
+      - target_index: index of target in all images
+      - feature_list: list of extracted features for images
+      - k_neighbors: number of k neighbors to get for target
       - k_neighbors = number of neighbors to extract
-      - feature_list = list of extracted features
-      - target_img: index of target image
     Returns: 
-      - df with filename of nearest neighbors and cosine distannce to target
+      - df with filename of nearest neighbors and cosine distance to target
     """
     # Initialise nearest neighbors algorithm 
     neighbors = NearestNeighbors(n_neighbors=k_neighbors, 
