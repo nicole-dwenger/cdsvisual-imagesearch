@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 """
 Image Search using Color Histograms: From a collection of images, extract color histograms and compare to target histogram, to find similar images. 
 
@@ -106,11 +105,11 @@ def main():
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
     
-    # Save data frame in output directory
+    # Save data frame in output directory, using target image for filename
     out_df = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_hist.csv")
     distances_df.to_csv(out_df)
     
-    # Save plot with similar images in output directory
+    # Save plot with similar images in output directory, using target image for filename
     out_plot = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_hist_top3.png")
     plot_similar(img_dir, target_img, distances_df, out_plot)
 
@@ -127,7 +126,7 @@ def get_histogram(img_path):
     Input: 
       - img_path: path to image as str
     Returns:
-      - Normalised color histogram
+      - normalised color histogram
     """
     # Load image
     img = cv2.imread(str(img_path))

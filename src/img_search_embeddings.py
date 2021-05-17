@@ -92,7 +92,10 @@ def main():
     model = VGG16(weights='imagenet', include_top=False, pooling='avg', input_shape=input_shape)
     
     # Extract features of all images using VGG16
-    feature_list = get_feature_list(img_paths, model, input_shape)
+    feature_list = []
+    for img_path in tqdm(img_paths):
+        img_features = extract_features(img_path, input_shape, model)
+        feature_list.append(img_features)
     
     # Get k nearest neighbors of target image, and store name and distance in df
     distances_df = get_target_neighbors(img_paths, target_index, feature_list, k_neighbors)
@@ -119,45 +122,34 @@ def main():
     
 # HELPER FUNCTIONS ------------------------------------ 
            
-def get_feature_list(img_paths, model, input_shape):
+def extract_features(img_path, input_shape, model):
     """
-    For each image: Load the image, preprocess it to fit to the model, 
-    extract features, flatten and normalise features, append features to feature_list.
+    Load an image, preprocess for VGG16, predict features,
+    flatten and normalise feautures 
     Input:
-      - img_paths: list of paths to images
-      - model: model to use for feature extraction
-      - input_shape: size to reshape images to for model
-    Returns: 
-      - list of extracted features for all images
+      - img_path: file path to an image
+      - input_shape: img shape to fit to pretrained model
+    Returns:
+      - normalized_features: list of normalised features for img
     """
-    # Create empty list for features of all images
-    feature_list = []
-
-    # For each index/image in file_paths
-    for i in tqdm(range(len(img_paths))):
-
-        # Get the path of the image and load the image based on the input shape
-        img_path = img_paths[i]
-        img = load_img(img_path, target_size=(input_shape[0],input_shape[1]))
+    # Load the image fitted to the input shape
+    img = load_img(img_path, target_size=(input_shape[0],input_shape[1]))
         
-        # Turn image to array and add dimension at the beginning
-        img_array = img_to_array(img)
-        expanded_img_array = np.expand_dims(img_array, axis=0)
-        
-        # Preprocess image using tensorflows preprocess function
-        preprocessed_img = preprocess_input(expanded_img_array)
-        
-        # Extract, flatten and normalise features of the image using the loaded model
-        features = model.predict(preprocessed_img)
-        flattened_features = features.flatten()
-        normalized_features = flattened_features / norm(features)
-        
-        # Append features to feature list
-        feature_list.append(normalized_features)
+    # Turn image to array and add dimension at the beginning
+    img_array = img_to_array(img)
+    expanded_img_array = np.expand_dims(img_array, axis=0)
 
-    return feature_list
+    # Preprocess image for VGG16
+    preprocessed_img = preprocess_input(expanded_img_array)
 
-     
+    # Extract, flatten and normalise features of the image using the loaded model
+    features = model.predict(preprocessed_img)
+    flattened_features = features.flatten()
+    normalized_features = flattened_features / norm(features)
+    
+    return normalized_features
+    
+    
 def get_target_neighbors(img_paths, target_index, feature_list, k_neighbors):
     """
     Get the neighbors and distances of the target image
