@@ -47,30 +47,39 @@ import pandas as pd
 
 def main():
     
+    # --- ARGUMENT PARSER  AND FILEPATHS ---
+    
     # Initialise arguent parser
     ap = argparse.ArgumentParser()
     
-    # Input options for path and target image
-    ap.add_argument("-d", "--directory", help = "Path to directory of images", required = False, default = "../data/flowers")
-    ap.add_argument("-t", "--target_img", help = "Filename of the target image", required = False, default = "image_0001.jpg")
+    # Input options for path to images
+    ap.add_argument("-d", "--directory", help = "Path to directory of images", 
+                    required = False, default = "../data/flowers")
+    
+    # Input option for target image name
+    ap.add_argument("-t", "--target_img", help = "Filename of the target image", 
+                    required = False, default = "image_0001.jpg")
 
     # Extract inputs
     args = vars(ap.parse_args())
     img_dir = args["directory"]
     target_img = args["target_img"]
     
-    # Get file paths to target image
-    target_path = os.path.join(img_dir, target_img)
-    # Get file paths to all other images, remove the target path
-    img_paths = get_paths(img_dir)
-    img_paths.remove(target_path)
-    
-    # Create empty target data frame
-    df = pd.DataFrame(columns=["filename", "chisquare_distance"])
+    # --- IMAGE SEARCH ---
     
     # Print message
     print(f"\n[INFO] Initialising image search for {target_img} using color histograms.")
-
+    
+    # Get filepath to target image
+    target_path = os.path.join(img_dir, target_img)
+    # Get file paths to all images in directory 
+    img_paths = get_paths(img_dir)
+    # Remove target path from all image paths
+    img_paths.remove(target_path)
+    
+    # Create empty target data frame for distances
+    distances_df = pd.DataFrame(columns=["filename", "chisquare_distance"])
+    
     # Get histogram of target image
     target_hist = get_histogram(target_path)
 
@@ -83,12 +92,14 @@ def main():
         # Calculate the distance of the image by comparing the target and image histogram
         distance = round(cv2.compareHist(target_hist, img_hist, cv2.HISTCMP_CHISQR), 2)
         # Append filename and distance to dataframe
-        df = df.append({"filename": img_name, 
-                         "chisquare_distance": distance}, ignore_index = True)
+        distances_df = distances_df.append({"filename": img_name, 
+                                            "chisquare_distance": distance}, ignore_index = True)
 
         
     # Sort data frame by distance and reset index
-    df = df.sort_values("chisquare_distance").reset_index()
+    distances_df = distances_df.sort_values("chisquare_distance").reset_index()
+    
+    # --- OUTPUT ---
     
     # Prepare output directory 
     out_dir = os.path.join("..", "out")
@@ -97,15 +108,15 @@ def main():
     
     # Save data frame in output directory
     out_df = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_hist.csv")
-    df.to_csv(out_df)
+    distances_df.to_csv(out_df)
     
     # Save plot with similar images in output directory
     out_plot = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_hist_top3.png")
-    plot_similar(img_dir, target_img, df, out_plot)
+    plot_similar(img_dir, target_img, distances_df, out_plot)
 
-    # Print message
+    # Print message, and print closest image to target image
     print(f"\n[INFO] Output is saved in {out_dir}, the closest image to {os.path.splitext(target_img)[0]} is:")
-    print(df.iloc[1])
+    print(distances_df.iloc[0])
     
 
 # HELPER FUNCTIONS ------------------------------------

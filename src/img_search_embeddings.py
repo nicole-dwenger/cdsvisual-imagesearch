@@ -58,6 +58,8 @@ import matplotlib.pyplot as plt
 
 def main():
     
+    # --- ARGUMENT PARSER ---
+    
     # Initialise argument parser for output filename
     ap = argparse.ArgumentParser()
     
@@ -75,23 +77,27 @@ def main():
     target_img = args["target_img"]
     k_neighbors = args["k_neighbors"]
     
+    # --- IMAGE SEARCH: FEATURE EXTRACTION AND KNN ---
+    
+    # Print message
+    print(f"\n[INFO] Initialising image search for {target_img} using features extracted from VGG16.")
+    
     # Get all file paths and file path and index to target image
     img_paths = get_paths(img_dir)
     target_path = os.path.join(img_dir, target_img)
     target_index = img_paths.index(target_path)
     
-    # Print message
-    print(f"\n[INFO] Initialising image search for {target_img} using features extracted from VGG16.")
-    
     # Define input shape and load pretrained model (VGG16)
     input_shape = (224,244,3)
     model = VGG16(weights='imagenet', include_top=False, pooling='avg', input_shape=input_shape)
     
-    # Extract features of all images 
-    feature_list = extract_features(img_paths, model, input_shape)
+    # Extract features of all images using VGG16
+    feature_list = get_feature_list(img_paths, model, input_shape)
     
     # Get k nearest neighbors of target image, and store name and distance in df
-    df = get_neighbors(img_paths, k_neighbors, feature_list, target_index)
+    distances_df = get_target_neighbors(img_paths, target_index, feature_list, k_neighbors)
+    
+    # --- OUTPUT ---
     
     # Define output directory
     out_dir = os.path.join("..", "out")
@@ -100,20 +106,20 @@ def main():
         
     # Save data frame in output directory
     out_df = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_embeddings.csv")
-    df.to_csv(out_df) 
+    distances_df.to_csv(out_df) 
     
     # Plot and save target neighbors in output directory
     out_plot = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_embeddings_top3.png")
-    plot_similar(img_dir, target_img, df, out_plot)
+    plot_similar(img_dir, target_img, distances_df, out_plot)
     
     # Print message
     print(f"\n[INFO] Output is saved in {out_dir}, the closest image to {os.path.splitext(target_img)[0]} is:")
-    print(df.iloc[1])
+    print(distances_df.iloc[0])
     
     
 # HELPER FUNCTIONS ------------------------------------ 
            
-def extract_features(img_paths, model, input_shape):
+def get_feature_list(img_paths, model, input_shape):
     """
     For each image: Load the image, preprocess it to fit to the model, 
     extract features, flatten and normalise features, append features to feature_list.
@@ -152,7 +158,7 @@ def extract_features(img_paths, model, input_shape):
     return feature_list
 
      
-def get_neighbors(img_paths, k_neighbors, feature_list, target_index):
+def get_target_neighbors(img_paths, target_index, feature_list, k_neighbors):
     """
     Get the neighbors and distances of the target image
     Input:
@@ -162,7 +168,7 @@ def get_neighbors(img_paths, k_neighbors, feature_list, target_index):
     Returns: 
       - df with filename of nearest neighbors and cosine distannce to target
     """
-    # Initilaise nearest neighbors algorithm 
+    # Initialise nearest neighbors algorithm 
     neighbors = NearestNeighbors(n_neighbors=k_neighbors, 
                                  algorithm='brute',
                                  metric='cosine').fit(feature_list)
@@ -173,11 +179,15 @@ def get_neighbors(img_paths, k_neighbors, feature_list, target_index):
     # Create empty dataframe to store values
     df = pd.DataFrame(columns=["filename", "cosine_distance"])
     
-    # For all inicies of neighbors, get the name of the image and the distance and append to df
+    # For all indicies of neighbors, start at 1, because 0 is target
     for i in range(1, len(indices[0])):
+        # Get the index of the image
         img_index = indices[0][i]
+        # Get the name of the image using the index
         img_name = os.path.split(img_paths[img_index])[1]
+        # Get thte distance of the image to the target
         distance = distances[0][i]
+        # Append filename and distance to dataframe
         df = df.append({"filename": img_name, 
                         "cosine_distance": distance}, ignore_index = True)
 
