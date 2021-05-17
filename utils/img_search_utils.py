@@ -18,9 +18,9 @@ def get_paths(img_dir):
     """
     Getting filepaths to all images with defined extensions.
     Input: 
-      - directory: str, directory where images are stored  
+      - img_dir: directory where images are stored 
     Returns:  
-      - List of filepaths as str to images in directory
+      - paths: list of filepaths to images
     """
     # Define list of valid extensions
     extensions = [".jpg", ".JPG", ".jpeg", ".JPEG", ".png", ".PNG"]

@@ -6,9 +6,7 @@
 
 > This project relates to Assignment 2: Visual Image Search of the course Visual Analytics
 
-The purpose of the project was to develop a tool to find similar images to a given target image. Such a tool could be useful to identify duplicates or sort images. Further, it may be practically implemented as an image recommender, i.e., *if you like this image, you might also like these images*. 
-
-Two scripts were developed, which use different methods to find similar images for a target image: (1) using colour histograms and (2) using transfer learning, i.e., feature embeddings extracted from the pre-trained model VGG16. The aim of developing scripts for two different methods was also to compare their outputs and usability, which are discussed below.
+The purpose of the project was to develop a tool to find similar images to a given target image. Such a tool could be useful to identify duplicates or sort images. Further, it may be practically implemented as an image recommender, i.e., *if you like this image, you might also like these images*. This repository contains two scripts for image search using different methods: (1) using colour histograms and (2) using transfer learning, i.e., feature embeddings extracted from the pre-trained model VGG16. The aim of developing scripts for two different methods was also to compare their outputs and usability, which are discussed below.
 
 
 ## Methods
