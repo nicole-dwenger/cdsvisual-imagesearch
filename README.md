@@ -33,11 +33,11 @@ Pre-trained CNNs can be used to extract image embeddings. In other words, pre-tr
     |-- image_0001_hist.csv             # Example output: csv file with silimiar images using color histograms
     |-- image_0001_hist_top3.png        # Exmaple output: png with target image and 3 clostest images using histograms
 
-|-- src/                                # Image search scripts
+|-- src/                                # Directory containing main image search scripts
     |-- img_search_embeddings.py        # Image search using feature embeddings
     |-- img_search_histogram.py         # Image search using color histograms
 
-|-- utils/                              # Utilities
+|-- utils/                              # Directory containing utility scripts
     |-- img_search_utils.py             # Utility script, with functions used across scripts
 
 |-- README.md
@@ -70,7 +70,7 @@ source venv_imagesearch/bin/activate
 
 
 ### 2. Data
-A zip file of the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) called `flowers.zip` is in the `data` directory, and should be unzipped to run the script. The script can also be run on a different set of images with the following extensions .jpg, .JPG, .jpeg, .JPEG, .png, .PNG,  by setting the `--path` argument (see below). 
+A zip file of the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) called `flowers.zip` is in the `data` directory, and should be unzipped to run the script. The script can also be run on a different set of images with the following extensions .jpg, .JPG, .jpeg, .JPEG, .png, .PNG,  by setting the `--directory` argument (see below). 
 
 ```bash
 # unzip files
