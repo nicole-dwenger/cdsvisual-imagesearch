@@ -54,72 +54,6 @@ from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 import matplotlib.pyplot as plt 
 
 
-# MAIN FUNCTION ------------------------------------
-
-def main():
-    
-    # --- ARGUMENT PARSER ---
-    
-    # Initialise argument parser for output filename
-    ap = argparse.ArgumentParser()
-    
-    # Input options for path, target image, and number of neighbors
-    ap.add_argument("-d", "--directory", help = "Path to directory of images", 
-                    required = False, default = "../data/flowers")
-    ap.add_argument("-t", "--target_img", help = "Filename of the target image", 
-                    required = False, default = "image_0001.jpg")
-    ap.add_argument("-k", "--k_neighbors", help = "Number of neighbors to extract for target", 
-                    required = False, default = 20)
-    
-    # Extract input parameters
-    args = vars(ap.parse_args())
-    img_dir = args["directory"]
-    target_img = args["target_img"]
-    k_neighbors = args["k_neighbors"]
-    
-    # --- IMAGE SEARCH: FEATURE EXTRACTION AND KNN ---
-    
-    # Print message
-    print(f"\n[INFO] Initialising image search for {target_img} using features extracted from VGG16.")
-    
-    # Get all file paths and file path and index to target image
-    img_paths = get_paths(img_dir)
-    target_path = os.path.join(img_dir, target_img)
-    target_index = img_paths.index(target_path)
-    
-    # Define input shape and load pretrained model (VGG16)
-    input_shape = (224,244,3)
-    model = VGG16(weights='imagenet', include_top=False, pooling='avg', input_shape=input_shape)
-    
-    # Extract features of all images using VGG16
-    feature_list = []
-    for img_path in tqdm(img_paths):
-        img_features = extract_features(img_path, input_shape, model)
-        feature_list.append(img_features)
-    
-    # Get k nearest neighbors of target image, and store name and distance in df
-    distances_df = get_target_neighbors(img_paths, target_index, feature_list, k_neighbors)
-    
-    # --- OUTPUT ---
-    
-    # Define output directory
-    out_dir = os.path.join("..", "out")
-    if not os.path.exists(out_dir):
-        os.mkdir(out_dir)
-        
-    # Save data frame in output directory
-    out_df = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_embeddings.csv")
-    distances_df.to_csv(out_df) 
-    
-    # Plot and save target neighbors in output directory
-    out_plot = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_embeddings_top3.png")
-    plot_similar(img_dir, target_img, distances_df, out_plot)
-    
-    # Print message
-    print(f"\n[INFO] Output is saved in {out_dir}, the closest image to {os.path.splitext(target_img)[0]} is:")
-    print(distances_df.iloc[0])
-    
-    
 # HELPER FUNCTIONS ------------------------------------ 
            
 def extract_features(img_path, input_shape, model):
@@ -185,6 +119,72 @@ def get_target_neighbors(img_paths, target_index, feature_list, k_neighbors):
                         "cosine_distance": distance}, ignore_index = True)
 
     return df
+
+
+# MAIN FUNCTION ------------------------------------
+
+def main():
+    
+    # --- ARGUMENT PARSER ---
+    
+    # Initialise argument parser for output filename
+    ap = argparse.ArgumentParser()
+    
+    # Input options for path, target image, and number of neighbors
+    ap.add_argument("-d", "--directory", help = "Path to directory of images", 
+                    required = False, default = "../data/flowers")
+    ap.add_argument("-t", "--target_img", help = "Filename of the target image", 
+                    required = False, default = "image_0001.jpg")
+    ap.add_argument("-k", "--k_neighbors", help = "Number of neighbors to extract for target", 
+                    required = False, default = 20)
+    
+    # Extract input parameters
+    args = vars(ap.parse_args())
+    img_dir = args["directory"]
+    target_img = args["target_img"]
+    k_neighbors = args["k_neighbors"]
+    
+    # --- IMAGE SEARCH: FEATURE EXTRACTION AND KNN ---
+    
+    # Print message
+    print(f"\n[INFO] Initialising image search for {target_img} using features extracted from VGG16.")
+    
+    # Get all file paths and file path and index to target image
+    img_paths = get_paths(img_dir)
+    target_path = os.path.join(img_dir, target_img)
+    target_index = img_paths.index(target_path)
+    
+    # Define input shape and load pretrained model (VGG16)
+    input_shape = (224,244,3)
+    model = VGG16(weights='imagenet', include_top=False, pooling='avg', input_shape=input_shape)
+    
+    # Extract features of all images using VGG16
+    feature_list = []
+    for img_path in tqdm(img_paths):
+        img_features = extract_features(img_path, input_shape, model)
+        feature_list.append(img_features)
+    
+    # Get k nearest neighbors of target image, and store name and distance in df
+    distances_df = get_target_neighbors(img_paths, target_index, feature_list, k_neighbors)
+    
+    # --- OUTPUT ---
+    
+    # Define output directory
+    out_dir = os.path.join("..", "out")
+    if not os.path.exists(out_dir):
+        os.mkdir(out_dir)
+        
+    # Save data frame in output directory
+    out_df = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_embeddings.csv")
+    distances_df.to_csv(out_df) 
+    
+    # Plot and save target neighbors in output directory
+    out_plot = os.path.join(out_dir, f"{os.path.splitext(target_img)[0]}_embeddings_top3.png")
+    plot_similar(img_dir, target_img, distances_df, out_plot)
+    
+    # Print message
+    print(f"\n[INFO] Output is saved in {out_dir}, the closest image to {os.path.splitext(target_img)[0]} is:")
+    print(distances_df.iloc[0])
 
     
 if __name__=="__main__":

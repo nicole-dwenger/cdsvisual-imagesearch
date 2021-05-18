@@ -34,13 +34,34 @@ from tqdm import tqdm
 sys.path.append(os.path.join(".."))
 from utils.img_search_utils import get_paths, plot_similar
            
-
 # Images and data
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+
+# HELPER FUNCTIONS ------------------------------------
+
+def get_histogram(img_path):
+    """
+    Generate normalised color histogram for RGB image stored in img_path
+    Input: 
+      - img_path: path to image as str
+    Returns:
+      - normalised color histogram
+    """
+    # Load image
+    img = cv2.imread(str(img_path))
+                   
+    # Calculate histogram for RGB color channels 
+    hist = cv2.calcHist([img], [0,1,2], None, [8,8,8], [0,256, 0,256, 0,256])
+    
+    # Normalise the histogram with min max regularisation
+    hist_normalised = cv2.normalize(hist, hist, 0,255, cv2.NORM_MINMAX)
+    
+    return hist_normalised
+    
 
 # MAIN FUNCTION ------------------------------------
 
@@ -116,28 +137,6 @@ def main():
     # Print message, and print closest image to target image
     print(f"\n[INFO] Output is saved in {out_dir}, the closest image to {os.path.splitext(target_img)[0]} is:")
     print(distances_df.iloc[0])
-    
-
-# HELPER FUNCTIONS ------------------------------------
-
-def get_histogram(img_path):
-    """
-    Generate normalised color histogram for RGB image stored in img_path
-    Input: 
-      - img_path: path to image as str
-    Returns:
-      - normalised color histogram
-    """
-    # Load image
-    img = cv2.imread(str(img_path))
-                   
-    # Calculate histogram for RGB color channels 
-    hist = cv2.calcHist([img], [0,1,2], None, [8,8,8], [0,256, 0,256, 0,256])
-    
-    # Normalise the histogram with min max regularisation
-    hist_normalised = cv2.normalize(hist, hist, 0,255, cv2.NORM_MINMAX)
-    
-    return hist_normalised
     
     
 if __name__=="__main__":
