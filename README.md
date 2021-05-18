@@ -18,7 +18,7 @@ For this project, the [Oxford-17 flowers image dataset](https://www.robots.ox.ac
 Images can be represented by their distribution of color. In RGB colour space, colour histograms display how often each pixel intensity (0-255) occurs in each of the three colour channels for a given image. Thus, colour histograms were extracted for each of the images, and compared to the histogram of the target image. Similarity was measured using the chi-square distance measure. 
 
 ### 2. Image search using image embeddings
-Pre-trained CNNs can be used to extract image embeddings. In other words, pre-trained weights are used to predict a dense feature space, i.e., vector for each image. These vectors can be compared to find images that are visually similar. In this project, the pre-trained model VGG16 is used to extract features of each image. These feature representations are then fed into a k-Nearest-Neighbour algorithm, to find the k most similar images to a given target image.  
+Pre-trained CNNs can be used to extract image embeddings. In other words, pre-trained weights are used to predict a dense feature space, i.e., vector for each image. These vectors can be compared to find images that are visually similar. In this project, the pre-trained model VGG16 is used to extract features of each image. These feature representations are then fed into a k-Nearest-Neighbour algorithm, to find the k most similar images to a given target image, using the cosine distance measure.  
 
 
 ## Repository Structure
@@ -154,7 +154,7 @@ __Three most similar images to image_0001.jpg:__
 ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_hist_top3.png)  |  ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_0001_embeddings_top3.png)
 
 
-__Three most similar images to image_0300.jpg:__
+__Three most similar images to image_1320.jpg:__
 
  (1) using colour histograms | (2) using feature embeddings
 :-------------------------:|:-------------------------:
