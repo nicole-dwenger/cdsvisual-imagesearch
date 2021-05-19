@@ -117,7 +117,7 @@ def main():
 
         
     # Sort data frame by distance and reset index
-    distances_df = distances_df.sort_values("chisquare_distance").reset_index()
+    distances_df = distances_df.sort_values("chisquare_distance").reset_index(drop=True)
     
     # --- OUTPUT ---
     

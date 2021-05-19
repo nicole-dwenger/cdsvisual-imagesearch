@@ -82,7 +82,6 @@ def extract_features(img_path, input_shape, model):
     
     return normalized_features
     
-    
 def get_target_neighbors(img_paths, target_index, feature_list, k_neighbors):
     """
     Get the neighbors and distances of the target image
@@ -91,7 +90,6 @@ def get_target_neighbors(img_paths, target_index, feature_list, k_neighbors):
       - target_index: index of target in all images
       - feature_list: list of extracted features for images
       - k_neighbors: number of k neighbors to get for target
-      - k_neighbors = number of neighbors to extract
     Returns: 
       - df with filename of nearest neighbors and cosine distance to target
     """
