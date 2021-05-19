@@ -1,6 +1,6 @@
 # Image Search: Colour Histograms vs Feature Embeddings
 
-[Description](#description) | [Methods](#methods) | [Repository Structure](#repository-structure) | [Usage](#usage) | [Results and Disucssion](#results-and-discussion)
+[Description](#description) | [Methods](#methods) | [Repository Structure](#repository-structure) | [Usage](#usage) | [Results and Disucssion](#results-and-discussion) | [Contact](#contact)
 
 ## Description
 
@@ -159,3 +159,5 @@ __Three most similar images to image_1320.jpg:__
 :-------------------------:|:-------------------------:
 ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_hist_top3.png)  |  ![](https://github.com/nicole-dwenger/cdsvisual-imagesearch/blob/master/out/image_1320_embeddings_top3.png)
 
+## Contact
+If you have any questions, feel free to contact me at 201805351@post.au.dk.
