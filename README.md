@@ -68,7 +68,6 @@ bash create_venv.sh
 source venv_imagesearch/bin/activate
 ```
 
-
 ### 2. Data
 A zip file of the [Oxford-17 flowers image dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/17/) called `flowers.zip` is in the `data` directory, and should be unzipped to run the script. The script can also be run on a different set of images with the following extensions .jpg, .JPG, .jpeg, .JPEG, .png, .PNG,  by setting the `--directory` argument (see below). 
 
@@ -98,12 +97,12 @@ __Parameters:__
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
 - `-t, --target_img`: *str, optional, default:* `image_0001.jpg`\
-  Target image, for which all other images should be compared to find the most similar ones. 
+  Target image, for which all other images should be compared to find the most similar ones. Should be one of the images in the specified directory.
 
 
 __Output__ saved in `out/`:
 - `{target_img}_hist.csv`\
-  CSV file with filenames and chi-square distances of all images to the target image
+  CSV file with filenames and chi-square distances of all images to the target image.
 
 - `{target_img}_hist_top3.png`\
   Image with target image and 3 most similar images. 
@@ -128,7 +127,7 @@ __Parameters:__
   Path to directory where images are stored. Note that running default requires unzipping flowers.zip files (see above). 
 
 - `-t, --target_img`: *str, optional, default:* `image_0001.jpg`\
-  Target image, for which all other images should be compared to find the most similar ones. 
+  Target image, for which all other images should be compared to find the most similar ones. Should be one of the images in the specified directory. 
 
 - `-k, --k_neighbors`: *int, optional, default:* `20`\
   Number of k neighbors to extract and save distances for. 
